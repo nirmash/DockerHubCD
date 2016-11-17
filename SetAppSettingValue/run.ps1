@@ -1,6 +1,7 @@
 $settingValue = Get-Content $triggerInput
 $settingName = $env:PS_SETTING_NAME
-$siteName = $env:PS_SITENAME
+#$siteName = $env:PS_SITENAME
+$siteName = $settingValue.Split("/")[1].Split(":")[0]
 $resourceGroupName = $env:PS_RGNAME
 
 # Set Service Principal Credentials
