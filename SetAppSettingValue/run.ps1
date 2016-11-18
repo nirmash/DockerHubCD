@@ -1,9 +1,9 @@
 $settingValue = Get-Content $triggerInput
 $settingName = $env:PS_SETTING_NAME
-#$siteName = $env:PS_SITENAME
 $siteName = $settingValue.Split("/")[1].Split(":")[0]
 $resourceGroupName = $env:PS_RGNAME
 
+# DOCKER_CUSTOM_IMAGE_PULL_NUMBER is the variable we update to force a docker pull 
 # Set Service Principal Credentials
 # SP_PASSWORD, SP_USERNAME, SP_TENANTID are app settings
 Write-Output $settingValue | Out-String
@@ -23,8 +23,12 @@ ForEach ($setting in $appSettings) {
   $settings[$setting.Name] = $setting.Value;
 }
  
-# Update setting
+# Update image name
 $settings[$settingName]=[system.String]$settingValue
+
+# Update pull number
+$pullnum=(($settings["DOCKER_CUSTOM_IMAGE_PULL_NUMBER"] -as [int]) + 1) -as [string]
+$settings["DOCKER_CUSTOM_IMAGE_PULL_NUMBER"]=$pullnum
 
 # Set the app settings with updated lists
 Set-AzureRMWebApp -Name $siteName -ResourceGroupName $resourceGroupName -AppSettings $settings;
