@@ -15,7 +15,7 @@
       "type": "queue",
       "name": "outputQueueItem",
       "queueName": "ps-sitesettings-queue",
-      "connection": "nirsclassicfuncsotrage_STORAGE",
+      "connection": "azurefunctions72b13a4d_STORAGE",
       "direction": "out"
     }
   ],
