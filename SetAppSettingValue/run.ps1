@@ -42,6 +42,7 @@ $dDate = Get-Date -format "M/d/yyyy hh.mm.ss"
 $entity = [PSObject]@{
   Site = $siteName
   Setting = $settingName
+  DockerPullNUmber=$pullnum
   Value = $settingValue.Replace(":","\:")
   Date = $dDate
 }
